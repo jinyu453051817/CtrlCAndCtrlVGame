@@ -19,7 +19,7 @@ public class Test : MonoBehaviour, IPointerClickHandler
 
     public void AHA(PointerEventData eventData)
     {
-        print("AHA");
+        print("AHA1");
     }
 
     public void OnPointerClick(PointerEventData eventData)
