@@ -9,10 +9,11 @@ public class ActorController : MonoBehaviour
 
     public float walkSpeed = 1f;
     public float jumpForce = 1f;
+    public bool isGround = false;
 
     private Rigidbody2D rigid;
     private Ray2D ray;
-    private RaycastHit2D[] hit;
+    private RaycastHit2D hit;
 
     private bool startJumping = false;
 
@@ -27,7 +28,7 @@ public class ActorController : MonoBehaviour
     void Update()
     {
         if (pi.inputEnabled == false) return;
-        if (pi.isJump)
+        if (pi.isJump && isGround)
         {
             print("jump");
             startJumping = true;
@@ -43,5 +44,17 @@ public class ActorController : MonoBehaviour
             startJumping = false;
         }
 
+        hit = Physics2D.Raycast( transform.position, Vector2.down, 0.5f,LayerMask.GetMask("Ground"));
+        Debug.DrawLine(transform.position, (Vector2)transform.position + Vector2.down);
+        if (hit.collider != null)
+        {
+            isGround = true;
+
+        }
+        else
+        {
+            isGround = false;
+        }
+        
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Fungus;
 
 public class AloneFunction : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class AloneFunction : MonoBehaviour
     public GameObject rightPrefab;
     public GameObject content;
     public ActorController ac;
+    public GameConversationManager gcm;
+    public Flowchart fc;
 
     public void ShowDiaInRight()
     {
@@ -18,11 +21,19 @@ public class AloneFunction : MonoBehaviour
 
     public void SetPlayerCanMove()
     {
-        ac.pi.inputEnabled = true;
+        
+        ac.pi.inputEnabled = fc.GetBooleanVariable("inputEnable");
     }
 
-    public void SetPlayerCannotMove()
+    public void SetGameState()
     {
-        ac.pi.inputEnabled = false;
+        GameConversationManager.state = fc.GetIntegerVariable("state");
+    }
+
+    public void WindPower()
+    {
+        Rigidbody2D ball = GameObject.Find("ball").GetComponent<Rigidbody2D>();
+        ball.constraints = RigidbodyConstraints2D.None;
+        ball.AddForce(new Vector2(-50,0));
     }
 }
