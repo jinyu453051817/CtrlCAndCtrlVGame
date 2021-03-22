@@ -6,10 +6,10 @@ public class ActorController : MonoBehaviour
 {
     public IUserInput pi;
     
-
     public float walkSpeed = 1f;
     public float jumpForce = 1f;
     public bool isGround = false;
+    public bool canShowText = false;
 
     private Rigidbody2D rigid;
     private Ray2D ray;

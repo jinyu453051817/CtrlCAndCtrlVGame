@@ -10,7 +10,7 @@ public class KeybordInput :IUserInput {
     //键盘按键
     [Header("===== key settings =====")]
     public string keyJump;
-    public string keyB;
+    public string keyRightMouse;
     public string keyC;
     public string keyD;
 
@@ -18,11 +18,12 @@ public class KeybordInput :IUserInput {
     public MyButton KeyB = new MyButton();
     //public MyButton KeyC = new MyButton();
 
+   
 
     void Update()
     {
         KeyA.Tick(Input.GetButton(keyJump));
-        //KeyC.Tick(Input.GetButton(keyC));
+        KeyB.Tick(Input.GetButton(keyRightMouse));
 
         targetDRight = Input.GetAxis("Horizontal");
 
@@ -39,6 +40,7 @@ public class KeybordInput :IUserInput {
         Dvec = new Vector2(Dright, 0);
 
         isJump = KeyA.OnPressed;
+        showText = KeyB.OnReleased;
     }
 
 }
