@@ -5,6 +5,7 @@ using UnityEngine;
 public class ActorController : MonoBehaviour
 {
     public IUserInput pi;
+    private CopyManager cm;
     
     public float walkSpeed = 1f;
     public float jumpForce = 1f;
@@ -21,7 +22,8 @@ public class ActorController : MonoBehaviour
     void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
-        
+        cm = GameObject.Find("ShowText").GetComponent<CopyManager>();
+        cm.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -32,6 +34,15 @@ public class ActorController : MonoBehaviour
         {
             print("jump");
             startJumping = true;
+        }
+
+        if (canShowText)
+        {
+            if (pi.showText)
+            {
+                cm.gameObject.SetActive(!cm.gameObject.activeSelf);
+            }
+
         }
     }
 

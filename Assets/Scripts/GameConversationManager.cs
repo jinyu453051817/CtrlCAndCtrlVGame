@@ -7,7 +7,9 @@ public class GameConversationManager : MonoBehaviour
 {
     public static int state = 0;
 
+    public AloneFunction af;
     public Flowchart fc;
+    public CopyManager cm;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,7 @@ public class GameConversationManager : MonoBehaviour
             case "trigger1":
                 if (state == 1)
                 {
+                    cm.ChangeTextLevelShow(0);
                     fc.ExecuteBlock("level1_2");
                     FreezyBall();
                 }
@@ -41,6 +44,17 @@ public class GameConversationManager : MonoBehaviour
                     fc.ExecuteBlock("level1_6");
                     FreezyBall();
                 }
+                else if(state == 8)
+                {
+                    int colLength = collision.transform.parent.Find("trigger2").GetComponent<JumpBan>().colList.Count;
+                    if (colLength != 0)
+                    {
+                        for (int i = 0; i < colLength; i++)
+                        {
+                            collision.transform.parent.Find("trigger2").GetComponent<JumpBan>().colList[i].GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 1000));
+                        }
+                    }
+                }
                 break;
             case "trigger2":
                 if (state == 2)
@@ -51,13 +65,17 @@ public class GameConversationManager : MonoBehaviour
                 {
                     fc.ExecuteBlock("level1_5");
                 }
+                else if (state == 6)
+                {
+                    af.WindPower();
+                }
                 break;
             default:
                 break;
         }
     }
 
-    private void FreezyBall()
+    public static void FreezyBall()
     {
         Rigidbody2D ball = GameObject.Find("ball").GetComponent<Rigidbody2D>();
         ball.velocity = Vector2.zero;

@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class CtrlCText : MonoBehaviour
 {
-    public string nowstring = ""; 
+    public string nowstring = "";
+    public ActorController ac;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ac = GameObject.Find("player").GetComponent<ActorController>();
     }
 
     // Update is called once per frame
@@ -18,6 +19,7 @@ public class CtrlCText : MonoBehaviour
     {
         if (GetComponent<InputField>().isFocused)
         {
+            
 
             if (Input.GetKey(KeyCode.LeftControl))
             {
@@ -29,10 +31,20 @@ public class CtrlCText : MonoBehaviour
                     print("粘贴");
                 }
             }
+            else if (ac.pi.backspaceDown)
+            {
+                if (nowstring.Length != 0)
+                {
+                    nowstring = nowstring.Substring(0, nowstring.Length - 1);
+                    GetComponent<InputField>().text = nowstring;
+                }
+            }
             else
             {
+                print("11111111");
                 if (Input.anyKeyDown)
                 {
+                    print("anyKeyDown");
                     GetComponent<InputField>().text = nowstring;
                     return;
                 }

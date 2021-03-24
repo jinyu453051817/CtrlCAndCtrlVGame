@@ -12,8 +12,6 @@ public class AloneFunction : MonoBehaviour
     public ActorController ac;
     public GameConversationManager gcm;
     public Flowchart fc;
-    public Transform rightContent;
-    public CopyManager cm;
 
     public void ShowDiaInRight()
     {
@@ -34,9 +32,13 @@ public class AloneFunction : MonoBehaviour
 
     public void WindPower()
     {
-        Rigidbody2D ball = GameObject.Find("ball").GetComponent<Rigidbody2D>();
-        ball.constraints = RigidbodyConstraints2D.None;
-        ball.AddForce(new Vector2(-50,0));
+        if (GameConversationManager.state != 7)
+        {
+            Rigidbody2D ball = GameObject.Find("ball").GetComponent<Rigidbody2D>();
+            ball.constraints = RigidbodyConstraints2D.None;
+            ball.AddForce(new Vector2(-50, 0));
+        }
+        
     }
 
     public void CanShowText()
@@ -51,32 +53,9 @@ public class AloneFunction : MonoBehaviour
 
     public void ResetLevel1()
     {
-        GameObject.Find("text_level1_1").GetComponent<InputField>().text = "木";
+        GameObject.Find("muxiang").GetComponent<InputField>().text = "木";
+        print(GameObject.Find("muxiang").GetComponent<InputField>().text);
         ac.transform.position = new Vector3(-6.77f, -3.22f, 0);
         GameObject.Find("ball").transform.position = new Vector3(-5.1f, -2.58f, 0);
-        GameObject.Find("ball").GetComponent<SpriteRenderer>().color = Color.white;
-    }
-
-    public void SetPlayerPos()
-    {
-        ac.transform.position = new Vector3(fc.GetFloatVariable("PlayerX"), fc.GetFloatVariable("PlayerY"), 0);
-    }
-
-    public void ClearRight()
-    {
-        for (int i = 0; i < rightContent.childCount; i++)
-        {
-            Destroy(rightContent.GetChild(i).gameObject);
-        }
-    }
-
-    public void CloseTextShow()
-    {
-        cm.gameObject.SetActive(false);
-    }
-
-    public void ShowTextChange()
-    {
-        cm.ChangeTextLevelShow(fc.GetIntegerVariable("TextState"));
     }
 }
