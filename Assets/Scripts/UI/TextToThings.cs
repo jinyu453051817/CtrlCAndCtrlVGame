@@ -37,7 +37,8 @@ public class TextToThings : MonoBehaviour
                 if (nextText.gameObject.name == "qiu")
                 {
                     //goObject.GetComponent<Rigidbody2D>().mass = 99999;
-                    goObject.GetComponent<SpriteRenderer>().color = Color.black;
+                    Sprite[] sprite = Resources.LoadAll<Sprite>("Scenes/level1/ball2");
+                    goObject.GetComponent<SpriteRenderer>().sprite = sprite[0];
 
                     if (GameConversationManager.state == 7)
                     {
@@ -48,9 +49,31 @@ public class TextToThings : MonoBehaviour
                     }
                     else
                     {
-
-                    fc.ExecuteBlock("level1_7");
+                        fc.ExecuteBlock("level1_7");
                     }
+
+                }
+            }
+            else if(myText.text == "铁")
+            {
+                if (nextText.gameObject.name == "xiang")
+                {
+                    //goObject.GetComponent<Rigidbody2D>().mass = 99999;
+                    //Sprite[] sprite = Resources.LoadAll<Sprite>("Scenes/level1/ball2");
+                    //goObject.GetComponent<SpriteRenderer>().sprite = sprite[0];
+                    goObject.GetComponent<SpriteRenderer>().color = Color.black;
+
+                    //if (GameConversationManager.state == 7)
+                    //{
+                    //    print("dierguan");
+                    //    fc.ExecuteBlock("level1_8");
+                    //    GameConversationManager.FreezyBall();
+
+                    //}
+                    //else
+                    //{
+                    //    fc.ExecuteBlock("level1_7");
+                    //}
 
                 }
             }

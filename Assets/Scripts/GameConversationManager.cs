@@ -11,10 +11,12 @@ public class GameConversationManager : MonoBehaviour
     public Flowchart fc;
     public CopyManager cm;
 
+    private KeybordInput pi;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        pi = gameObject.GetComponent<KeybordInput>();
     }
 
     // Update is called once per frame
@@ -46,14 +48,7 @@ public class GameConversationManager : MonoBehaviour
                 }
                 else if(state == 8)
                 {
-                    int colLength = collision.transform.parent.Find("trigger2").GetComponent<JumpBan>().colList.Count;
-                    if (colLength != 0)
-                    {
-                        for (int i = 0; i < colLength; i++)
-                        {
-                            collision.transform.parent.Find("trigger2").GetComponent<JumpBan>().colList[i].GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 1000));
-                        }
-                    }
+                    
                 }
                 break;
             case "trigger2":
@@ -68,6 +63,36 @@ public class GameConversationManager : MonoBehaviour
                 else if (state == 6)
                 {
                     af.WindPower();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        switch (collision.gameObject.name)
+        {
+            case "trigger1":
+                print("11111");
+                if (state == 8)
+                {
+                    if (pi.hudong)
+                    {
+                        GameObject.Find("tanhuang").GetComponent<Animator>().SetTrigger("tan");
+
+                        int colLength = collision.transform.parent.Find("trigger2").GetComponent<JumpBan>().colList.Count;
+                        //GameObject.Find("tanhuang").GetComponent<Animator>().SetTrigger("tan");
+
+                        if (colLength != 0)
+                        {
+                            for (int i = 0; i < colLength; i++)
+                            {
+                                collision.transform.parent.Find("trigger2").GetComponent<JumpBan>().colList[i].GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 1000));
+                            }
+                        }
+                    }
                 }
                 break;
             default:

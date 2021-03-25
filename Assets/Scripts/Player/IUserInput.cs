@@ -14,6 +14,7 @@ public abstract class IUserInput : MonoBehaviour {
     public bool isJump = false;
     public bool showText = false;
     public bool backspaceDown = false;
+    public bool hudong = false;
 
     protected float targetDRight;
     protected float velocityDRight;

@@ -12,11 +12,12 @@ public class KeybordInput :IUserInput {
     public string keyJump;
     public string keyRightMouse;
     public string keyBackspace;
-    public string keyD;
+    public string keyHudong;
 
     public MyButton KeyA = new MyButton();
     public MyButton KeyB = new MyButton();
     public MyButton KeyC = new MyButton();
+    public MyButton KeyD = new MyButton();
 
    
 
@@ -25,6 +26,7 @@ public class KeybordInput :IUserInput {
         KeyA.Tick(Input.GetButton(keyJump));
         KeyB.Tick(Input.GetButton(keyRightMouse));
         KeyC.Tick(Input.GetButton(keyBackspace));
+        KeyD.Tick(Input.GetButton(keyHudong));
 
         targetDRight = Input.GetAxis("Horizontal");
 
@@ -43,6 +45,7 @@ public class KeybordInput :IUserInput {
         isJump = KeyA.OnPressed;
         showText = KeyB.OnReleased;
         backspaceDown = KeyC.OnPressed;
+        hudong = KeyD.OnPressed;
     }
 
 }

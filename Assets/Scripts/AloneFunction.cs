@@ -54,7 +54,8 @@ public class AloneFunction : MonoBehaviour
         GameObject.Find("text_level1_1").GetComponent<InputField>().text = "木";
         ac.transform.position = new Vector3(-6.77f, -3.22f, 0);
         GameObject.Find("ball").transform.position = new Vector3(-5.1f, -2.58f, 0);
-        GameObject.Find("ball").GetComponent<SpriteRenderer>().color = Color.white;
+        Sprite[] sprite = Resources.LoadAll<Sprite>("Scenes/level1/bowl1");
+        GameObject.Find("ball").GetComponent<SpriteRenderer>().sprite = sprite[0];
     }
 
     public void SetPlayerPos()
