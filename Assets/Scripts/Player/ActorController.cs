@@ -6,6 +6,7 @@ public class ActorController : MonoBehaviour
 {
     public IUserInput pi;
     private CopyManager cm;
+    private Animator anim;
     
     public float walkSpeed = 1f;
     public float jumpForce = 1f;
@@ -24,6 +25,7 @@ public class ActorController : MonoBehaviour
         rigid = gameObject.GetComponent<Rigidbody2D>();
         cm = GameObject.Find("ShowText").GetComponent<CopyManager>();
         cm.gameObject.SetActive(false);
+        anim = transform.Find("brave").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,11 @@ public class ActorController : MonoBehaviour
         {
             print("jump");
             startJumping = true;
+        }
+
+        if (pi.Dright>0 && transform.localScale.x<0 || pi.Dright < 0 && transform.localScale.x > 0)
+        {
+            Flip();
         }
 
         if (canShowText)
@@ -49,6 +56,8 @@ public class ActorController : MonoBehaviour
     void FixedUpdate()
     {
         rigid.velocity = new Vector2(pi.Dvec.x * walkSpeed, rigid.velocity.y);
+        anim.SetFloat("speed", Mathf.Abs(rigid.velocity.x));
+        
         if (startJumping)
         {
             rigid.AddForce(new Vector2(0, jumpForce));
@@ -67,5 +76,10 @@ public class ActorController : MonoBehaviour
             isGround = false;
         }
         
+    }
+
+    private void Flip()
+    {
+        transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
     }
 }
