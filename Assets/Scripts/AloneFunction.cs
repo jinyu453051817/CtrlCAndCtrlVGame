@@ -15,6 +15,11 @@ public class AloneFunction : MonoBehaviour
     public Transform rightContent;
     public CopyManager cm;
 
+    public GameObject level2Fire;
+    public GameObject level2Case;
+    public GameObject level2Dong;
+    public GameObject level2Right;
+
     public void ShowDiaInRight()
     {
         GameObject go = Instantiate(rightPrefab, content.transform);
@@ -79,5 +84,13 @@ public class AloneFunction : MonoBehaviour
     public void ShowTextChange()
     {
         cm.ChangeTextLevelShow(fc.GetIntegerVariable("TextState"));
+    }
+
+    public void Level2WaterDown()
+    {
+        level2Case.SetActive(false);
+        level2Fire.SetActive(false);
+        level2Dong.SetActive(false);
+        level2Right.SetActive(false);
     }
 }

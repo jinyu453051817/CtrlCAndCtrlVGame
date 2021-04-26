@@ -65,6 +65,7 @@ public class GameConversationManager : MonoBehaviour
                     af.WindPower();
                 }
                 break;
+           
             default:
                 break;
         }
@@ -94,6 +95,18 @@ public class GameConversationManager : MonoBehaviour
                         }
                     }
                 }
+                break;
+            case "enemy":
+                if (Input.GetMouseButtonDown(0))
+                {
+                    print("enemy");
+                    if (collision.transform.GetComponent<LittleEnemy>() != null)
+                    {
+                        collision.GetComponent<LittleEnemy>().enabled = false;
+                    }
+                    collision.transform.localScale = new Vector3(0.2f, -0.2f, 1);
+                }
+
                 break;
             default:
                 break;

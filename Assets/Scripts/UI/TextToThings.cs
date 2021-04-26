@@ -58,23 +58,37 @@ public class TextToThings : MonoBehaviour
             {
                 if (nextText.gameObject.name == "xiang")
                 {
-                    //goObject.GetComponent<Rigidbody2D>().mass = 99999;
-                    //Sprite[] sprite = Resources.LoadAll<Sprite>("Scenes/level1/ball2");
-                    //goObject.GetComponent<SpriteRenderer>().sprite = sprite[0];
                     goObject.GetComponent<SpriteRenderer>().color = Color.black;
-
-                    //if (GameConversationManager.state == 7)
-                    //{
-                    //    print("dierguan");
-                    //    fc.ExecuteBlock("level1_8");
-                    //    GameConversationManager.FreezyBall();
-
-                    //}
-                    //else
-                    //{
-                    //    fc.ExecuteBlock("level1_7");
-                    //}
-
+                }
+            }
+            else if (myText.text == "火" || myText.text == "火球")
+            {
+                if (nextText.gameObject.name == "muxiang")
+                {
+                    //goObject.GetComponent<SpriteRenderer>().color = Color.black;
+                    goObject.transform.Find("fire").GetComponent<Animator>().SetTrigger("fire");
+                }
+            }
+            else if (myText.text == "木")
+            {
+                if (nextText.gameObject.name == "bigXiang")
+                {
+                    Sprite sprite = Resources.Load<Sprite>("Scenes/level2/wooden case");
+                    goObject.GetComponent<SpriteRenderer>().sprite = sprite;
+                    GameObject fireShao = goObject.transform.Find("fireShao").gameObject;
+                    fireShao.SetActive(true);
+                    fireShao.GetComponent<Animator>().SetTrigger("fire");
+                }
+                else if (nextText.gameObject.name == "mutong" && fc.GetIntegerVariable("state") == 12)
+                {
+                    fc.ExecuteBlock("level2_4");
+                }
+            }
+            else if (myText.text == "马")
+            {
+                if (nextText.gameObject.name == "mutong")
+                {
+                    fc.ExecuteBlock("level2_3");
                 }
             }
         }
